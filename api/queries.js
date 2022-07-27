@@ -88,9 +88,9 @@ const getReportById = (request, response) => {
 }
 
 const createReport = (request, response) => {
-  const { equip_id, category, time, team, activity } = request.body
+  const { equip_id, category, time, team, activity, file } = request.body
 
-  pool.query('INSERT INTO reports (equip_id, category, time, team, activity) VALUES ($1, $2, $3, $4, $5) RETURNING *', [equip_id, category, time, team, activity], (error, results) => {
+  pool.query('INSERT INTO reports (equip_id, category, time, team, activity, file) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *', [equip_id, category, time, team, activity, file], (error, results) => {
     if (error) {
       throw error
     }

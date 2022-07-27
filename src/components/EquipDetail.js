@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useHistory } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import equipImage from "../assets/images/no-image.png";
 import ReportCategory from "./ReportCategory";
-// import ReportList from "./ReportList";
 
 const EquipDetail = () => {
   const location = useLocation();
-  const history = useHistory();
+  // const history = useHistory();
   const [currentEquipment, setCurrentEquipment] = useState({
     category: "",
     loc: "",
@@ -22,7 +21,7 @@ const EquipDetail = () => {
 
     async function fetchData() {
       const response = await fetch(
-        `http://192.168.43.230:3001/api/equipment/${equipmentId}`
+        `http://localhost:3001/api/equipment/${equipmentId}`
       );
       const data = await response.json();
       setCurrentEquipment(data[0]);

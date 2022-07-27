@@ -1,92 +1,59 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useParams } from "react-router-dom";
 
 const ReportAddForm = () => {
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [state, setState] = useState({
-    equip_id: useParams().id,
-    category: "",
-    time: "",
-    team: "",
-    activity: "",
-  });
-
-  console.log(state);
-
-  const handleCategoryChange = (e) => {
-    setState({ ...state, category: e.target.value });
-  };
-  const handleTimeChange = (e) => {
-    setState({ ...state, time: e.target.value });
-  };
-  const handleTeamChange = (e) => {
-    setState({ ...state, team: e.target.value });
-  };
-  const handleActivityChange = (e) => {
-    setState({ ...state, activity: e.target.value });
-  };
+  const equip_id = useParams().id;
 
   const handleSubmit = (e) => {
-    // setState({ ...state, id: e.target.value });
+    e.preventDefault();
+
+    // store the states in the form data
+    const formData = new FormData(e.target);
+    formData.append("equip_id", equip_id);
+    const data = {};
+    formData.forEach((value, key) => (data[key] = value));
+    console.log(data.file);
+
+    //post to database
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(state),
+      body: JSON.stringify(data),
     };
     async function fetchData() {
-      const response = await fetch(
-        "http://192.168.43.230:3001/api/report",
-        options
-      );
+      const response = await fetch("http://localhost:3001/api/report", options);
       if (response.ok) {
-        setIsSuccess(true);
-        // console.log(isSuccess);
+        alert("Success!");
+        e.target.reset();
       }
     }
     fetchData();
-    e.preventDefault();
   };
-
-  const { category, time, team, activity } = state;
 
   return (
     <div className="add-form">
-      {isSuccess && <h4 style={{ color: "green" }}>Success!</h4>}
       <form onSubmit={handleSubmit}>
         <label>Equipment Id:</label>
-        <input on type="text" name="id" value={useParams().id} disabled />
+        <input on type="text" name="equip_id" value={equip_id} disabled />
+
         <label>Category:</label>
-        <select value={category} onChange={handleCategoryChange} required>
+        <select name="category" required>
           <option value=""></option>
           <option value="preventive maintenance">Preventive maintenance</option>
           <option value="corrective maintenance">Corrective maintenance</option>
         </select>
 
         <label>Time:</label>
-        <input
-          type="date"
-          name="time"
-          value={time}
-          onChange={handleTimeChange}
-          required
-        />
+        <input type="date" name="time" required />
 
         <label>Team:</label>
-        <input
-          type="text"
-          name="team"
-          value={team}
-          onChange={handleTeamChange}
-          required
-        />
+        <input type="text" name="team" required />
 
         <label>Activity:</label>
-        <textarea
-          name="activity"
-          value={activity}
-          onChange={handleActivityChange}
-          required
-        />
+        <textarea name="activity" required />
+
+        <label>File (jpg, jpeg, png):</label>
+        <input type="file" name="file" accept=".jpg, .jpeg, .png" required/>
 
         <button type="submit">Save</button>
       </form>

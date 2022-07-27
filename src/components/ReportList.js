@@ -5,7 +5,7 @@ const ReportList = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("http://192.168.43.230:3001/api/joins");
+      const response = await fetch("http://localhost:3001/api/joins");
       const data = await response.json();
       setReports({ data });
     }
@@ -25,6 +25,7 @@ const ReportList = () => {
           <td>{report.time}</td>
           <td>{report.team}</td>
           <td>{report.activity}</td>
+          <td>{report.file}</td>
         </tr>
       );
     });
@@ -41,6 +42,7 @@ const ReportList = () => {
             <th>Time</th>
             <th>Team</th>
             <th>Activity</th>
+            <th>File</th>
           </tr>
           {listItems}
         </table>

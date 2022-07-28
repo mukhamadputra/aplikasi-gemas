@@ -5,6 +5,7 @@ import home from "../../assets/images/home.png";
 import equip from "../../assets/images/equip.png";
 import report from "../../assets/images/report.png";
 import user from "../../assets/images/user.png";
+import dashboard from "../../assets/images/dashboard.png";
 
 const Navigation = () => {
   return (
@@ -13,6 +14,11 @@ const Navigation = () => {
         <li>
           <Link to="/home">
             <img src={home} alt=""/>
+          </Link>
+        </li>
+        <li>
+          <Link to="/dashboard">
+            <img src={dashboard} alt=""/>
           </Link>
         </li>
         <li>

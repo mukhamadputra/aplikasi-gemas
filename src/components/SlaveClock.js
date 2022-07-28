@@ -9,7 +9,7 @@ const SlaveClock = () => {
     useEffect(() => {
       async function fetchData() {
         const response = await fetch(
-          "http://localhost:3001/api/equipments"
+          "http://192.168.43.230:3001/api/equipments"
         );
         const data = await response.json();
         setEquipments({ data });

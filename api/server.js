@@ -3,8 +3,9 @@ const bodyParser = require("body-parser");
 const app = express();
 const db = require("./queries");
 const port = 3001;
-const cors = require('cors');
+const cors = require("cors");
 
+app.use("/images", express.static("../images"));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(
@@ -12,6 +13,24 @@ app.use(
     extended: true,
   })
 );
+
+var multer = require("multer");
+const path = require("path");
+
+const diskStorage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, path.join(__dirname, "../images"));
+  },
+
+  filename: function(req, file, cb) {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+
+const upload = multer({ storage: diskStorage });
 
 // app.get("/equipments", (req, res) => {
 //   res.send("Receive GET request");
@@ -41,7 +60,8 @@ app.delete("/api/equipment/:id", db.deleteEquipment);
 
 app.get("/api/reports", db.getReports);
 app.get("/api/report/:id", db.getReportById);
-app.post("/api/report", db.createReport);
+// app.post("/api/report", db.createReport);
+app.post("/api/report", upload.single("file"), db.createReport);
 app.put("/api/report/:id", db.updateReport);
 app.delete("/api/report/:id", db.deleteReport);
 

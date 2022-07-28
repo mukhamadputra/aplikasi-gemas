@@ -9,7 +9,7 @@ const DigitalSignage = () => {
     useEffect(() => {
       async function fetchData() {
         const response = await fetch(
-          "http://localhost:3001/api/cm"
+          "http://192.168.43.230:3001/api/cm"
         );
         const data = await response.json();
         setEquipments({ data });

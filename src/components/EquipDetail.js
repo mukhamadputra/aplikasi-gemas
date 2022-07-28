@@ -21,7 +21,7 @@ const EquipDetail = () => {
 
     async function fetchData() {
       const response = await fetch(
-        `http://localhost:3001/api/equipment/${equipmentId}`
+        `http://192.168.43.230:3001/api/equipment/${equipmentId}`
       );
       const data = await response.json();
       setCurrentEquipment(data[0]);

@@ -1,30 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 const ReportAddForm = () => {
   const equip_id = useParams().id;
+  const [files, setFiles] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // store the states in the form data
-    const formData = new FormData(e.target);
+    // const formData = new FormData(e.target);
+    const formData = new FormData();
     formData.append("equip_id", equip_id);
-    const data = {};
-    formData.forEach((value, key) => (data[key] = value));
-    console.log(data.file);
+    formData.append("category", e.target.category.value);
+    formData.append("time", e.target.time.value);
+    formData.append("team", e.target.team.value);
+    formData.append("activity", e.target.activity.value);
+    formData.append("file", files);
+    // const data = {};
+    // formData.forEach((value, key) => (data[key] = value));
+    // console.log(data);
 
     //post to database
     const options = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      // headers: { "Content-Type": "application/json" },
+      // body: JSON.stringify(data),
+      body: formData
     };
     async function fetchData() {
-      const response = await fetch("http://localhost:3001/api/report", options);
+      const response = await fetch("http://192.168.43.230:3001/api/report", options);
       if (response.ok) {
         alert("Success!");
         e.target.reset();
+        setFiles();
       }
     }
     fetchData();
@@ -32,7 +41,7 @@ const ReportAddForm = () => {
 
   return (
     <div className="add-form">
-      <form onSubmit={handleSubmit}>
+      <form enctype="multipart/form-data" onSubmit={handleSubmit}>
         <label>Equipment Id:</label>
         <input on type="text" name="equip_id" value={equip_id} disabled />
 
@@ -53,7 +62,15 @@ const ReportAddForm = () => {
         <textarea name="activity" required />
 
         <label>File (jpg, jpeg, png):</label>
-        <input type="file" name="file" accept=".jpg, .jpeg, .png" required/>
+        <input
+          type="file"
+          name="file"
+          accept=".jpg, .jpeg, .png"
+          // onChange={(e) => setFiles(URL.createObjectURL(e.target.files[0]))}
+          onChange={(e) => setFiles(e.target.files[0])}
+          required
+        />
+        {/* <img src={files} width="100px" /> */}
 
         <button type="submit">Save</button>
       </form>

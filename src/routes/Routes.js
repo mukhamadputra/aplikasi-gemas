@@ -16,6 +16,7 @@ import ReportAdd from "../components/ReportAdd";
 import SlaveClock from "../components/SlaveClock";
 import DigitalBanner from "../components/DigitalBanner";
 import DigitalSignage from "../components/DigitalSignange";
+import Dashboard from "../pages/Dashboard";
 
 const Routes = () => {
   return (
@@ -56,6 +57,9 @@ const Routes = () => {
         </Route>
         <Route path="/home">
           <Home />
+        </Route>
+        <Route path="/dashboard">
+          <Dashboard />
         </Route>
         <Route path="/">
           <Login />

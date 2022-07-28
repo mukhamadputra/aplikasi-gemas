@@ -5,7 +5,7 @@ const ReportList = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("http://localhost:3001/api/joins");
+      const response = await fetch("http://192.168.43.230:3001/api/joins");
       const data = await response.json();
       setReports({ data });
     }
@@ -16,6 +16,9 @@ const ReportList = () => {
   const listItems =
     reports &&
     reports.data.map((report) => {
+      // const base64String = btoa(
+      //   String.fromCharCode(...new Uint8Array(report.file.data))
+      // )
       return (
         <tr key={report.id}>
           <td>{number++}</td>
@@ -25,14 +28,18 @@ const ReportList = () => {
           <td>{report.time}</td>
           <td>{report.team}</td>
           <td>{report.activity}</td>
-          <td>{report.file}</td>
+          <td>
+            <img src={`http://192.168.43.230:3001/images/${report.file}`} alt="" width="100px" />
+          </td>
+          {/* <td><img src={`data:image/png;base64,${base64String}`} width="100px" /></td> */}
+          {/* <td>{Buffer.from(report.file, "binary").toString("base64")}</td> */}
         </tr>
       );
     });
   return (
     <div className="report-list">
       <h4>Report List</h4>
-      <div style={{ overflow: "scroll", maxHeight: "250px" }}>
+      <div style={{ overflow: "scroll", maxHeight: "450px" }}>
         <table>
           <tr>
             <th>No</th>

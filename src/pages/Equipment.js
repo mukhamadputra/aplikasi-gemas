@@ -15,20 +15,20 @@ const Equipment = () => {
           <button>Add New</button>
         </Link>
         <h1 style={{ marginTop: "12px" }}>Equipment Page</h1>
-        <ul style={{ display: "flex" }}>
-          <li className="submenu" style={{ margin: "24px" }}>
+        <ul>
+          <li className="submenu">
             <Link to="/slaveclock">
               <img className="logo-equip" src={slaveclock} alt="" />
               Slave clock
             </Link>
           </li>
-          <li className="submenu" style={{ margin: "24px" }}>
+          <li className="submenu">
             <Link to="/digitalbanner">
               <img className="logo-equip" src={banner} alt="" />
               Digital banner
             </Link>
           </li>
-          <li className="submenu" style={{ position:"relative", top:"200px", right:"260px" }}>
+          <li className="submenu" >
             <Link to="/digitalsignage">
               <img className="logo-equip" src={sign} alt="" />
               Digital signage

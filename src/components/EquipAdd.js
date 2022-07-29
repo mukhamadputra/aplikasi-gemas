@@ -39,7 +39,7 @@ const EquipAddForm = () => {
     };
     async function fetchData() {
       const response = await fetch(
-        "http://192.168.43.230:3001/api/equipment",
+        "http://localhost:3001/api/equipment",
         options
       );
       if (response.ok) {

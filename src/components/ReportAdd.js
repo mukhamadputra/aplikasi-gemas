@@ -29,7 +29,7 @@ const ReportAddForm = () => {
       body: formData
     };
     async function fetchData() {
-      const response = await fetch("http://192.168.43.230:3001/api/report", options);
+      const response = await fetch("http://localhost:3001/api/report", options);
       if (response.ok) {
         alert("Success!");
         e.target.reset();

@@ -5,7 +5,7 @@ const ReportList = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("http://192.168.43.230:3001/api/joins");
+      const response = await fetch("http://localhost:3001/api/joins");
       const data = await response.json();
       setReports({ data });
     }
@@ -29,7 +29,7 @@ const ReportList = () => {
           <td>{report.team}</td>
           <td>{report.activity}</td>
           <td>
-            <img src={`http://192.168.43.230:3001/images/${report.file}`} alt="" width="100px" />
+            <img src={`http://localhost:3001/images/${report.file}`} alt="" width="100px" />
           </td>
           {/* <td><img src={`data:image/png;base64,${base64String}`} width="100px" /></td> */}
           {/* <td>{Buffer.from(report.file, "binary").toString("base64")}</td> */}

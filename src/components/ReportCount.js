@@ -7,7 +7,7 @@ const ReportCount = () => {
 
     useEffect(() => {
       async function fetchData() {
-        const response = await fetch("http://192.168.43.230:3001/api/reportcount");
+        const response = await fetch("http://localhost:3001/api/reportcount");
         const data = await response.json();
         setEquipments({ data });
       }
@@ -31,7 +31,7 @@ const ReportCount = () => {
     return (
       <div className="equip-list">
         <h4>Report Count</h4>
-        <div style={{ overflow: "scroll", maxHeight: "400px" }}>
+        <div style={{ overflow: "scroll", maxHeight: "350px" }}>
           <table>
             <tr>
               <th>No</th>

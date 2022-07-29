@@ -34,7 +34,7 @@ const ReportAddForm = () => {
     };
     async function fetchData() {
       const response = await fetch(
-        "http://192.168.43.230:3001/api/report",
+        "http://localhost:3001/api/report",
         options
       );
       if (response.ok) {
